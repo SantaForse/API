@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import UserProvider from './contexts/UserContext';
+import UserContext from './contexts/UserContext';
 
 
 
 function App() {
  
   return (
-    <UserProvider>
+    <UserContext>
       <div className="container mt-5">
 
       </div>
-    </UserProvider>
+    </UserContext>
   );
 }
 

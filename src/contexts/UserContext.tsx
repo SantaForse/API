@@ -2,16 +2,15 @@ import React, {useState, useContext, createContext} from 'react'
 import { User, UserRequest } from '../models/UserModels'
 import { UserProviderProps } from '../models/UserProviderPropsModel'
 
-interface IUserProviderProps {
-    children: any
-}
 
-const UserProvider = ({children} : UserProviderProps) => {
+
+export const UserContextProvider = createContext<>(null)
+const UserContext = ({children} : UserProviderProps) => {
   return (
-    <UserContext.Provider>
+    <UserContextProvider.Provider>
         {children}
-    </UserContext.Provider>
+    </UserContextProvider.Provider>
   )
 }
 
-export default UserProvider
+export default UserContext
