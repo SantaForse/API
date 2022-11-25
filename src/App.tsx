@@ -1,17 +1,21 @@
 import React from 'react';
 import './App.css';
-import UserContext from './contexts/UserContext';
+import UserProvider from './contexts/UserContext';
+import UserList from './components/UserList';
+import CreateForm from './components/CreateForm';
 
 
 
 function App() {
  
   return (
-    <UserContext>
+    <UserProvider>
       <div className="container mt-5">
-
+        <CreateForm />
+        <hr className="my-5" />
+        <UserList />
       </div>
-    </UserContext>
+    </UserProvider>
   );
 }
 
