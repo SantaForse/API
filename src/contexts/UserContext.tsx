@@ -9,10 +9,10 @@ export interface IUserContext {
     userRequest: UserRequest
     setUserRequest: React.Dispatch<React.SetStateAction<UserRequest>>
     users: User[]
-    create: (e: React.FormEvent<UserRequest>) => void
+    create: (e: React.FormEvent) => void
     get: (id: number) => void
     getAll: () => void
-    update: (id: number, e: React.FormEvent<User>) => void
+    update: (id: number, e: React.FormEvent) => void
     remove: (id: number) => void
 
 }
@@ -31,7 +31,7 @@ export const useUserContext = () => { return useContext(UserContext)}
     const [users, setUsers] = useState<User[]>([])
 
 
-    const create = async (e: React.FormEvent<UserRequest>) => {
+    const create = async (e: React.FormEvent) => {
         e.preventDefault()
 
         const result = await fetch(`${baseUrl}`, {
@@ -55,7 +55,7 @@ export const useUserContext = () => { return useContext(UserContext)}
             setUsers(await result.json())
 
     }
-    const update = async (id: number, e: React.FormEvent<User>) => {
+    const update = async (id: number, e: React.FormEvent) => {
           e.preventDefault()
 
       const result = await fetch(`${baseUrl}/${id}`, {
