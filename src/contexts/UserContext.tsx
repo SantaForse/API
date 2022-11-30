@@ -12,7 +12,7 @@ export interface IUserContext {
     create: (e: React.FormEvent) => void
     get: (id: number) => void
     getAll: () => void
-    update: (id: number, e: React.FormEvent) => void
+    update: (e: React.FormEvent) => void
     remove: (id: number) => void
 
 }
@@ -20,7 +20,7 @@ export interface IUserContext {
 export const UserContext = createContext<IUserContext | null>(null)
 export const useUserContext = () => { return useContext(UserContext)}
 
-    const UserProvider = ({children} : UserProviderProps) => {
+  const UserProvider = ({children} : UserProviderProps) => {
     const baseUrl = 'http://localhost:5000/api/users'
     const user_default: User = { id: 0, firstName: '', lastName: '', email: ''}
     const userRequest_default: UserRequest = { firstName: '', lastName: '', email: '', password: ''}
@@ -41,8 +41,12 @@ export const useUserContext = () => { return useContext(UserContext)}
             },
             body: JSON.stringify(userRequest)
         })
-        if (result.status === 201)
+        
+        if (result.status === 201) {
           setUserRequest(userRequest_default)
+        } else {
+            console.log('error')
+        }
     }
     const get = async (id: number) => {
         const result = await fetch(`${baseUrl}/${id}`)
@@ -55,10 +59,10 @@ export const useUserContext = () => { return useContext(UserContext)}
             setUsers(await result.json())
 
     }
-    const update = async (id: number, e: React.FormEvent) => {
+    const update = async (e: React.FormEvent) => {
           e.preventDefault()
 
-      const result = await fetch(`${baseUrl}/${id}`, {
+      const result = await fetch(`${baseUrl}/${user.id}`, {
           method: 'put',
           headers: {
               'Content-Type': 'application/json'

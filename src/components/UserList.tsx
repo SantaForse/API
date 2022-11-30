@@ -3,17 +3,19 @@ import {IUserContext, UserContext} from '../contexts/UserContext'
 import { User } from '../models/UserModels'
 
 const UserList = () => {
-    const { users, getAll } = React.useContext(UserContext) as IUserContext
+    const { users, getAll, remove } = React.useContext(UserContext) as IUserContext
 
     useEffect(() => {
         getAll()
     }, [getAll])
 
+   
+
     return (
         <>
         <h3 className="display-6 mb-4">List of Users</h3>
             {
-                users.map((user: User) => (<div key={user.id} className="mb-3">{user.firstName} {user.lastName}</div>))
+                users.map((user: User) => (<div onClick={() => remove(user.id)} key={user.id} className="mb-3">{user.firstName} {user.lastName}</div>))
             }
         </>
     )
